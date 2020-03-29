@@ -5,9 +5,12 @@ import App from './App'
 import router from './router'
 import Element from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
-
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 Vue.config.productionTip = false
 Vue.use(Element)
+Vue.use(VueAxios, axios)
+axios.defaults.withCredentials = true
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
