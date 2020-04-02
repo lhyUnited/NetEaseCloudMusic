@@ -12,5 +12,5 @@
   
 ![我的主页](https://img.shields.io/badge/lhyUnited-brightgreen)  ![github starts](https://img.shields.io/github/stars/lhyUnited/NetEaseCloudMusic?style=plastic)
  
- 
+ 在线[demo](https://music.tomluvjerry.cn)
 [MIT LICENSE](https://opensource.org/licenses/MIT)
