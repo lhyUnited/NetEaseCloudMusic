@@ -1,30 +1,16 @@
 # neteasecloudmusic
 
-> 网易云音乐仿制
+> 网易云音乐播放器demo
 
-## Build Setup
+##说明
+1. 本站所有网易云api均由[Binaryify](https://github.com/Binaryify/NeteaseCloudMusicApi)提供
+2. 由于实际调用的是网易云官方api，所以搜素结果与官网保持一致
+3. 本站提供普通用户在线听歌和歌曲下载的功能<em>(vip歌曲受限)</em>，请勿将下载文件用于商业用途
+4. 本站所有功能在[chrome](https://static.tomluvjerry.cn:3001/uploads/b847a7a57f8d99672e367de2d78dec17.exe), [firefox](https://static.tomluvjerry.cn:3001/uploads/635a6b13d17d6aed0269f09faf92a254.exe), [搜狗高速浏览器](https://static.tomluvjerry.cn:3001/uploads/b847a7a57f8d99672e367de2d78dec17.exe)上测试通过
+5. 本站暂不支持手机端访问，目前只有web端
 
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-
-# run unit tests
-npm run unit
-
-# run e2e tests
-npm run e2e
-
-# run all tests
-npm test
-```
-
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+  
+![我的主页](https://img.shields.io/badge/lhyUnited-brightgreen)  ![github starts](https://img.shields.io/github/stars/lhyUnited/NetEaseCloudMusic?style=plastic)
+ 
+ 
+<center>[mit](https://opensource.org/licenses/MIT)</center>
