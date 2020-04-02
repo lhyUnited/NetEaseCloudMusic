@@ -46,7 +46,7 @@
         </el-popover>
       </div>
       <div class="nec-player-download">
-        <el-link :underline="false" :disabled="disabled" :href="(this.songList[this.index].length === 0) ? '' : (this.baseUrl + this.songList[this.index].id + '.mp3')" target="_blank" download><i class="fas fa-download fa-2x btn-download"></i></el-link>
+        <el-link :underline="false" :disabled="disabled" :href="(this.index <= -1) ? '' : (this.baseUrl + this.songList[this.index].id + '.mp3')" target="_blank" download><i class="fas fa-download fa-2x btn-download"></i></el-link>
       </div>
       <div class="nec-player-list-btn btn-list">
         <i class="fas fa-list-ul fa-2x" @click="expandSongList"></i>
@@ -159,6 +159,7 @@ export default {
       }
     },
     removeSongs (index) {
+      console.log(index)
       if (this.songList.length === 1) {
         this.index = -1
         this.songList.splice(0, 1)
@@ -170,7 +171,7 @@ export default {
       } else if (index === this.index) {
         if (index === this.songList.length - 1) {
           this.songList.splice(index, 1)
-          let newId = (index + 1) % this.songList.length
+          let newId = index % this.songList.length
           this.playFromList(newId, this.songList[newId].id)
           this.index = newId
         } else {
