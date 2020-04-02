@@ -12,7 +12,7 @@
             <li>由于实际调用的是网易云官方api，所以搜素结果与官网保持一致</li>
             <li>本站提供普通用户在线听歌和歌曲下载的功能<em>(vip歌曲受限)</em>，请勿将下载文件用于商业用途</li>
             <li>本站所有功能在<el-link type="primary" href="https://static.tomluvjerry.cn:3001/uploads/b847a7a57f8d99672e367de2d78dec17.exe">chrome</el-link>, <el-link type="primary" href="https://static.tomluvjerry.cn:3001/uploads/635a6b13d17d6aed0269f09faf92a254.exe">firefox</el-link>和<el-link type="primary" href="https://static.tomluvjerry.cn:3001/uploads/b847a7a57f8d99672e367de2d78dec17.exe">搜狗高速浏览器</el-link>上测试通过</li>
-            <li>本站暂不支持手机端访问，目前只有web端</li>
+            <li>iOS设备存在无法调节音量问题</li>
           </ol>
           <div class="nec-main-footer">
             <p><a href="https://2020.tomluvjerry.cn"><img alt="我的主页" src="https://img.shields.io/badge/lhyUnited-brightgreen"></a>

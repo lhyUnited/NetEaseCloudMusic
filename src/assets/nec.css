@@ -3,6 +3,21 @@ html, body {
   margin: 0;
   padding: 0;
 }
+@media screen and (max-width: 1440px) {
+  .nec-player-wrapper {
+    width: 980px !important;
+  }
+  .nec-player-play {
+    font-size: 14px;
+    float: left;
+    width: 360px !important;
+  }
+  .nec-player-controls {
+    margin-left: 40px;
+    margin-top: 12px;
+    float: left;
+  }
+}
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
