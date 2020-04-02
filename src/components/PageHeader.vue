@@ -1,10 +1,10 @@
 <template>
   <el-header>
-    <div class="page-logo">
+    <div class="page-logo" @click="goHome" title="回到首页">
       <h1>NetEaseCloudMusic</h1>
     </div>
     <div class="nec-search">
-      <el-input prefix-icon="el-icon-search" v-model="keyWord" placeholder="输入任意关键字来搜索" @keydown.enter.native="search">
+      <el-input prefix-icon="el-icon-search" v-model="keyWord" placeholder="输入任意内容按回车键搜索" @keydown.enter.native="search">
       </el-input>
     </div>
   </el-header>
@@ -36,6 +36,10 @@ export default {
         this.$router.push('/search?keyword=' + this.keyWord)
           .then(() => {})
       }
+    },
+    goHome () {
+      this.$router.push('/')
+        .then(() => {})
     }
   }
 }
