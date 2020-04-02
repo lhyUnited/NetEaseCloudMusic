@@ -4,6 +4,10 @@ html, body {
   padding: 0;
 }
 @media screen and (max-width: 1440px) {
+  .nec-player-list {
+    min-height: 500px !important;
+    font-size: 16px;
+  }
   .nec-player-wrapper {
     width: 980px !important;
   }
