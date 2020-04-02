@@ -13,4 +13,4 @@
 ![我的主页](https://img.shields.io/badge/lhyUnited-brightgreen)  ![github starts](https://img.shields.io/github/stars/lhyUnited/NetEaseCloudMusic?style=plastic)
  
  
-<center>[mit](https://opensource.org/licenses/MIT)</center>
+[MIT LICENSE](https://opensource.org/licenses/MIT)
