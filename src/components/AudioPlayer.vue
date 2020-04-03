@@ -205,8 +205,13 @@ export default {
     playBack () {
       let len = this.songList.length
       if (len > 0) {
-        let id = this.songList[Math.abs(this.index - 1) % len].id
-        this.playFromList(Math.abs(this.index - 1) % len, id)
+        if (this.index === 0) {
+          let id = this.songList[len - 1].id
+          this.playFromList(len - 1, id)
+        } else {
+          let id = this.songList[this.index - 1].id
+          this.playFromList(this.index - 1, id)
+        }
       }
     },
     expandSongList () {
