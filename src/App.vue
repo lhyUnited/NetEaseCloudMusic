@@ -1,12 +1,25 @@
 <template>
   <div id="app">
-    <router-view/>
+    <router-view @getSongInfo="getSongInfo"/>
+    <audio-player :song-info="songInfo"></audio-player>
   </div>
 </template>
 
 <script>
+import AudioPlayer from '@/components/AudioPlayer'
 export default {
-  name: 'App'
+  name: 'App',
+  components: {AudioPlayer},
+  data () {
+    return {
+      songInfo: {}
+    }
+  },
+  methods: {
+    getSongInfo (val) {
+      this.songInfo = JSON.parse(JSON.stringify(val))
+    }
+  }
 }
 </script>
 

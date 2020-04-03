@@ -22,7 +22,6 @@
         </div>
       </el-main>
     </el-container>
-    <AudioPlayer :songInfo="songInfo"></AudioPlayer>
     <el-footer>
     </el-footer>
   </el-container>
@@ -36,63 +35,6 @@ export default {
   components: {PageHeader, AudioPlayer},
   data () {
     return {
-      results: '',
-      songs: [],
-      clicked: false,
-      offset: 1,
-      total: 0,
-      limit: 10,
-      songInfo: {
-        name: '',
-        id: 0,
-        url: '',
-        artists: []
-      }
-    }
-  },
-  methods: {
-    initialList () {
-      this.axios.get('/search?keywords=' + this.searchModel.keyWord + '&limit=' + this.limit +
-        '&offset=' + (this.offset - 1) + '&type=1')
-        .then((res) => {
-          if (res.data.code === 200) {
-            console.log(res)
-            this.songs = res.data.result.songs
-            this.total = res.data.result.songCount
-          }
-        })
-    },
-    handleCurrentChange (val) {
-      console.log(val)
-      this.offset = val
-      this.initialList()
-    },
-    handleSizeChange (val) {
-      this.limit = val
-      this.initialList()
-    },
-    search () {
-      this.initialList()
-    },
-    getUrl (id, row) {
-      this.axios.get('/song/url?id=' + id)
-        .then((res) => {
-          if (res.data.code === 200) {
-            console.log(res)
-            this.songInfo.id = id
-            this.songInfo.url = res.data.data[0].url
-            this.songInfo.name = row.name
-            this.songInfo.artists = row.artists
-            this.clicked = true
-          }
-        })
-        .catch((err) => {
-          console.log(err)
-          this.$message.error('网络出错啦')
-        })
-    },
-    onPause () {
-      console.log('paused')
     }
   }
 }

@@ -24,7 +24,6 @@
       :page-size="limit"
       :current-page="offset"></el-pagination>
     </el-main>
-    <audio-player :song-info="songInfo"></audio-player>
   </el-container>
 </template>
 
@@ -104,6 +103,7 @@ export default {
                   this.songInfo.url = res.data.data[0].url
                   this.songInfo.name = row.name
                   this.songInfo.artists = row.artists
+                  this.$emit('getSongInfo', this.songInfo)
                 }
               }
             })
