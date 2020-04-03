@@ -115,6 +115,15 @@ html, body {
   top: 0;
   left: 20px;
 }
+.logo-link {
+  text-decoration: none;
+}
+.logo-link {
+  color: red;
+}
+.logo-link:visited {
+  color: red;
+}
 .nec-search {
   display: inline-block;
   margin-top: 10px;

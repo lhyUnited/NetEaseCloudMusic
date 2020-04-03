@@ -1,7 +1,7 @@
 <template>
   <el-header>
-    <div class="page-logo" @click="goHome" title="回到首页">
-      <h1>NetEaseCloudMusic</h1>
+    <div class="page-logo" title="回到首页">
+      <a class="logo-link" href="/"><h1>NetEaseCloudMusic</h1></a>
     </div>
     <div class="nec-search">
       <el-input prefix-icon="el-icon-search" v-model="keyWord" placeholder="输入任意内容按回车键搜索" @keydown.enter.native="search">
