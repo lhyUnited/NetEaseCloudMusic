@@ -87,7 +87,7 @@ export default {
       playing: false,
       totalTime: 0,
       currentTime: 0,
-      picUrl: 'http://s4.music.126.net/style/web2/img/default/default_album.jpg',
+      picUrl: 'http://s4.music.126.net/style/web2/img/default/default_album.jpg?param=40y40',
       sliderTime: 0,
       disabled: true,
       expandList: false,
@@ -137,7 +137,7 @@ export default {
       if (this.songList.length !== 0 && this.index > -1) {
         this.axios.get('/song/detail?ids=' + this.songList[this.index].id)
           .then((res) => {
-            this.picUrl = res.data.songs[0].al.picUrl
+            this.picUrl = res.data.songs[0].al.picUrl + '?param=40y40'
             this.url = this.baseUrl + this.songList[this.index].id + '.mp3'
           })
           .catch((err) => {
@@ -196,7 +196,7 @@ export default {
       this.url = this.baseUrl + id + '.mp3'
       this.axios.get('/song/detail?ids=' + id)
         .then((res) => {
-          this.picUrl = res.data.songs[0].al.picUrl + '&param=40y40'
+          this.picUrl = res.data.songs[0].al.picUrl + '?param=40y40'
         })
       this.play()
       localStorage.setItem('index', this.index)
