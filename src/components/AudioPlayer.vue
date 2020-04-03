@@ -122,7 +122,9 @@ export default {
   },
   methods: {
     unload () {
+      this.songList = JSON.parse(localStorage.getItem('songList'))
       localStorage.setItem('songList', JSON.stringify(this.songList))
+      this.index = parseInt(localStorage.getItem('index'))
       localStorage.setItem('index', this.index)
     },
     initialSongList () {
@@ -161,7 +163,6 @@ export default {
       }
     },
     removeSongs (index) {
-      console.log(index)
       if (this.songList.length === 1) {
         this.index = -1
         this.songList.splice(0, 1)
@@ -198,6 +199,7 @@ export default {
           this.picUrl = res.data.songs[0].al.picUrl
         })
       this.play()
+      localStorage.setItem('index', this.index)
     },
     playForward () {
       let len = this.songList.length
