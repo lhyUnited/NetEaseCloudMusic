@@ -9,7 +9,7 @@
 4. 本站所有功能在[chrome](https://static.tomluvjerry.cn:3001/uploads/b847a7a57f8d99672e367de2d78dec17.exe), [firefox](https://static.tomluvjerry.cn:3001/uploads/635a6b13d17d6aed0269f09faf92a254.exe), [搜狗高速浏览器](https://static.tomluvjerry.cn:3001/uploads/b847a7a57f8d99672e367de2d78dec17.exe)上测试通过
 5. iOS设备存在无法调节音量问题
   
-![我的主页](https://img.shields.io/badge/lhyUnited-brightgreen)  ![github starts](https://img.shields.io/github/stars/lhyUnited/NetEaseCloudMusic?style=plastic)
+[![我的主页](https://img.shields.io/badge/lhyUnited-brightgreen)](https://2020.tomluvjerry.cn)  [![github starts](https://img.shields.io/github/stars/lhyUnited/NetEaseCloudMusic?style=plastic)](https://github.com/lhyUnited/NetEaseCloudMusic/stargazers)
  
  在线[demo](https://music.tomluvjerry.cn)  
  
