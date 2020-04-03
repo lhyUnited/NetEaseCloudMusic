@@ -156,6 +156,8 @@ export default {
         this.songList.push(singleSong)
         this.$message.success('成功加入播放列表')
         this.index = this.songList.length - 1
+        localStorage.setItem('songList', JSON.stringify(this.songList))
+        localStorage.setItem('index', this.index)
       }
     },
     removeSongs (index) {
