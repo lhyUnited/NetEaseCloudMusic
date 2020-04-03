@@ -169,7 +169,7 @@ export default {
         this.url = ''
         this.totalTime = 0
         this.sliderTime = 0
-        this.picUrl = 'http://s4.music.126.net/style/web2/img/default/default_album.jpg'
+        this.picUrl = 'http://s4.music.126.net/style/web2/img/default/default_album.jpg?param=40y40'
         this.pause()
       } else if (index === this.index) {
         if (index === this.songList.length - 1) {
@@ -196,7 +196,7 @@ export default {
       this.url = this.baseUrl + id + '.mp3'
       this.axios.get('/song/detail?ids=' + id)
         .then((res) => {
-          this.picUrl = res.data.songs[0].al.picUrl
+          this.picUrl = res.data.songs[0].al.picUrl + '&param=40y40'
         })
       this.play()
       localStorage.setItem('index', this.index)
