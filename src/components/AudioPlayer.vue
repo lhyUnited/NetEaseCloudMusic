@@ -184,6 +184,8 @@ export default {
         this.songList.splice(index, 1)
         this.index = this.songList.findIndex(x => x.id === id)
       }
+      localStorage.setItem('songList', JSON.stringify(this.songList))
+      localStorage.setItem('index', this.index)
     },
     playFromList (index, id) {
       this.pause()
