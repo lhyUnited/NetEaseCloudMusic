@@ -87,7 +87,7 @@ export default {
       playing: false,
       totalTime: 0,
       currentTime: 0,
-      picUrl: 'http://s4.music.126.net/style/web2/img/default/default_album.jpg?param=40y40',
+      picUrl: 'https://s4.music.126.net/style/web2/img/default/default_album.jpg?param=40y40',
       sliderTime: 0,
       disabled: true,
       expandList: false,
@@ -169,7 +169,7 @@ export default {
         this.url = ''
         this.totalTime = 0
         this.sliderTime = 0
-        this.picUrl = 'http://s4.music.126.net/style/web2/img/default/default_album.jpg?param=40y40'
+        this.picUrl = 'https://s4.music.126.net/style/web2/img/default/default_album.jpg?param=40y40'
         this.pause()
       } else if (index === this.index) {
         if (index === this.songList.length - 1) {

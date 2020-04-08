@@ -16,8 +16,8 @@
             <li>请使用<em>大陆ip访问</em>, 部分歌曲受地区保护</li>
           </ol>
           <div class="nec-main-footer">
-            <p><a href="https://2020.tomluvjerry.cn"><img alt="我的主页" src="https://img.shields.io/badge/lhyUnited-brightgreen"></a>
-              <a href="https://github.com/lhyUnited/NetEaseCloudMusic/stargazers"><img height="20px" alt="GitHub stars" src="https://img.shields.io/github/stars/lhyUnited/NetEaseCloudMusic?style=plastic"></a>
+            <p><a href="https://2020.tomluvjerry.cn"><img alt="我的主页" src="../assets/lhyUnited-brightgreen.svg"></a>
+              <a href="https://github.com/lhyUnited/NetEaseCloudMusic/stargazers"><img height="20" alt="GitHub stars" src="../assets/NetEaseCloudMusic.svg"></a>
             </p>
           </div>
         </div>
