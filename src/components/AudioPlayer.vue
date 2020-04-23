@@ -2,6 +2,8 @@
   <el-row class="nec-player">
     <audio ref="audio" :src="this.url"
            preload
+           @play="played"
+           @pause="paused"
     @loadedmetadata="onLoadedmetadata"
     @timeupdate="onTimeupdate">
     </audio>
@@ -272,6 +274,12 @@ export default {
         //   })
         //   .catch((err) => console.log(err))
       }
+    },
+    played () {
+      this.playing = true
+    },
+    paused () {
+      this.playing = false
     },
     dragDown () {
       this.continue = this.playing === true
