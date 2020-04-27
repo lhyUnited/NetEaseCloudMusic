@@ -1,4 +1,4 @@
-html, body {
+html, body, #app, .el-container {
   height: 100%;
   margin: 0;
   padding: 0;
@@ -37,12 +37,6 @@ html, body {
   border-radius:5px;
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
   background-color: rgba(0, 0, 0, .1)
-}
-.el-container {
-  height: auto !important;
-}
-.el-main {
-  padding-bottom: 60px;
 }
 .nec-aside {
   height: 100%;

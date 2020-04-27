@@ -1,7 +1,7 @@
 <template>
   <el-header>
     <div class="page-logo" title="回到首页">
-      <router-link class="logo-link" :to="{path: '/'}"><h1>NetEaseCloudMusic</h1></router-link>
+      <router-link class="logo-link" :to="{path: '/'}"><h1>NeteaseCloudMusic</h1></router-link>
     </div>
     <div class="nec-search">
       <el-input prefix-icon="el-icon-search" v-model="keyWord" placeholder="输入任意内容按回车键搜索" @keydown.enter.native="search">
