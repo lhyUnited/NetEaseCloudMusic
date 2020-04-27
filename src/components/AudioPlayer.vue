@@ -277,9 +277,20 @@ export default {
     },
     played () {
       this.playing = true
+      const artistsArr = this.songList[this.index].artists
+      let artists = ''
+      for (let i = 0; i < artistsArr.length; i++) {
+        if (i + 1 === artistsArr.length) {
+          artists += artistsArr[i].name
+        } else {
+          artists += artistsArr[i].name + '/'
+        }
+      }
+      document.title = '▶ ' + this.songList[this.index].name + '-' + artists
     },
     paused () {
       this.playing = false
+      document.title = 'NeteaseCloudMusic'
     },
     dragDown () {
       this.continue = this.playing === true
