@@ -1,7 +1,7 @@
 <template>
   <el-container class="is-vertical">
     <page-header></page-header>
-    <el-main>
+    <el-main class="nec-search-result">
     <el-table :data="songs">
       <el-table-column label="名称">
         <template slot-scope="props">

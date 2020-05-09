@@ -1,9 +1,12 @@
 <template>
   <el-container>
-    <page-header></page-header>
+    <page-header :mainKeyWord="mainKeyWord" @changeMainKeyWord="getKeyWord"></page-header>
     <el-container>
       <el-main>
         <div class="nec-main">
+          <el-input class="nec-main-input" v-model="mainKeyWord"
+                    placeholder="输入任意内容按回车键搜索" @keydown.enter.native="search">
+          </el-input>
           <div class="nec-main-title">
           <p>本站所有网易云api均由<el-link type="primary" href="https://github.com/Binaryify/NeteaseCloudMusicApi">Binaryify</el-link>提供</p>
           </div>
@@ -37,6 +40,18 @@ export default {
   components: {PageHeader, AudioPlayer},
   data () {
     return {
+      mainKeyWord: ''
+    }
+  },
+  methods: {
+    search () {
+      if (this.mainKeyWord !== '') {
+        this.$router.push('/search?keyword=' + this.mainKeyWord)
+          .then(() => {})
+      }
+    },
+    getKeyWord (val) {
+      this.mainKeyWord = val
     }
   }
 }

@@ -210,3 +210,9 @@ html, body, #app, .el-container {
   text-align: center;
   margin: 30px 0 30px 0;
 }
+.nec-search-result {
+  padding-bottom: 60px;
+}
+.nec-main-input input {
+  text-align: center;
+}
