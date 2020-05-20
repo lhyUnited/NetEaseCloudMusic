@@ -114,6 +114,12 @@ export default {
     window.addEventListener('beforeunload', e => this.unload(e))
     this.initialSongList()
   },
+  mounted () {
+    let volume = localStorage.getItem('volume') === 'null' ? 100 : localStorage.getItem('volume') * 100
+    this.volume = volume
+    this.$refs.audio.volume = volume / 100
+    // this.changeVolume()
+  },
   beforeDestroy () {
     window.removeEventListener('beforeunload', () => {})
   },
@@ -127,7 +133,8 @@ export default {
       this.songList = JSON.parse(localStorage.getItem('songList'))
       localStorage.setItem('songList', JSON.stringify(this.songList))
       this.index = parseInt(localStorage.getItem('index'))
-      localStorage.setItem('index', this.index)
+      localStorage.setItem('index', isNaN(this.index) ? 0 : this.index)
+      localStorage.setItem('volume', localStorage.getItem('volume'))
     },
     initialSongList () {
       if (JSON.parse(localStorage.getItem('songList')) === null || JSON.parse(localStorage.getItem('songList') === null)) {
@@ -150,6 +157,7 @@ export default {
     },
     changeVolume () {
       this.$refs.audio.volume = this.volume / 100
+      localStorage.setItem('volume', this.$refs.audio.volume)
     },
     insertIntoSongList (singleSong) {
       let index = this.songList.findIndex(x => x.id === singleSong.id)
