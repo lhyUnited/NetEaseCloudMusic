@@ -115,7 +115,10 @@ export default {
     this.initialSongList()
   },
   mounted () {
-    let volume = localStorage.getItem('volume') === 'null' ? 100 : localStorage.getItem('volume') * 100
+    if (JSON.parse(localStorage.getItem('volume')) === null) {
+      localStorage.setItem('volume', '1')
+    }
+    let volume = localStorage.getItem('volume') * 100
     this.volume = volume
     this.$refs.audio.volume = volume / 100
     // this.changeVolume()
