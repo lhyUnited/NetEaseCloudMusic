@@ -211,7 +211,7 @@ html, body, #app, .el-container {
   margin: 30px 0 30px 0;
 }
 .nec-search-result {
-  padding-bottom: 60px;
+  margin-bottom: 60px;
 }
 .nec-main-input input {
   text-align: center;
