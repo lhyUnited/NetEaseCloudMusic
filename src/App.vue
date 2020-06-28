@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <router-view @getSongInfo="getSongInfo"/>
-    <audio-player :song-info="songInfo"></audio-player>
+    <router-view @getSongInfo="getSongInfo" />
+    <audio-player :song-info="songInfo" :order-change="orderChange"></audio-player>
   </div>
 </template>
 
@@ -9,15 +9,17 @@
 import AudioPlayer from '@/components/AudioPlayer'
 export default {
   name: 'App',
-  components: {AudioPlayer},
+  components: { AudioPlayer },
   data () {
     return {
-      songInfo: {}
+      songInfo: {},
+      orderChange: ''
     }
   },
   methods: {
-    getSongInfo (val) {
-      this.songInfo = JSON.parse(JSON.stringify(val))
+    getSongInfo () {
+      this.songInfo = JSON.parse(JSON.stringify(arguments[0]))
+      this.orderChange = arguments[1]
     }
   }
 }
@@ -25,7 +27,7 @@ export default {
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

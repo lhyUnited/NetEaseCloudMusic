@@ -1,54 +1,76 @@
 <template>
   <el-row class="nec-player">
-    <audio ref="audio" :src="this.url"
-           preload
-           @play="played"
-           @pause="paused"
-    @loadedmetadata="onLoadedmetadata"
-    @timeupdate="onTimeupdate">
-    </audio>
+    <audio
+      ref="audio"
+      :src="this.url"
+      preload
+      @play="played"
+      @pause="paused"
+      @loadedmetadata="onLoadedmetadata"
+      @timeupdate="onTimeupdate"
+    ></audio>
     <div class="nec-player-wrapper">
       <div class="nec-player-controls">
-          <i @click="playBack" class="fas fa-backward fa-2x btn-back"></i>
-          <i @click="playOrPause" class="btn-play" :class="{'fas fa-play fa-2x': !this.playing, 'fas fa-pause fa-2x': this.playing}"></i>
-          <i @click="playForward" class="fas fa-forward fa-2x btn-next"></i>
+        <i @click="playBack" class="fas fa-backward fa-2x btn-back"></i>
+        <i
+          @click="playOrPause"
+          class="btn-play"
+          :class="{'fas fa-play fa-2x': !this.playing, 'fas fa-pause fa-2x': this.playing}"
+        ></i>
+        <i @click="playForward" class="fas fa-forward fa-2x btn-next"></i>
       </div>
       <div class="nec-player-page">
-        <a class="">
-          <img alt="歌曲封面" :src="this.picUrl"/>
+        <a class>
+          <img alt="歌曲封面" :src="this.picUrl" />
         </a>
       </div>
       <div class="nec-player-play">
         <div class="nec-player-words">
           <span>{{ songList[this.index] === undefined ? '' : songList[this.index].name }}</span>
           <span>&nbsp;&nbsp;</span>
-          <span v-for="(item, Artindex) in (songList[index] === undefined ? '' : songList[index].artists)" :key="item.id">{{ item.name }}<span v-if="Artindex < songList[index].artists.length - 1">/</span></span>
+          <span
+            v-for="(item, Artindex) in (songList[index] === undefined ? '' : songList[index].artists)"
+            :key="item.id"
+          >
+            {{ item.name }}
+            <span v-if="Artindex < songList[index].artists.length - 1">/</span>
+          </span>
         </div>
-        <el-slider v-model="sliderTime"
-                   @mousedown.native="dragDown"
-                   @mouseup.native="dragUp"
-                   :format-tooltip="formatProcessToolTip"
-                   @change="changeCurrentTime"></el-slider>
+        <el-slider
+          v-model="sliderTime"
+          @mousedown.native="dragDown"
+          @mouseup.native="dragUp"
+          :format-tooltip="formatProcessToolTip"
+          @change="changeCurrentTime"
+        ></el-slider>
       </div>
       <div class="nec-player-time">
         <span>{{ currentTime | initialSeconds}} | {{ totalTime | initialSeconds}}</span>
       </div>
       <div class="nec-player-volume btn-volume">
-        <el-popover placement="top"
-                    justify="center"
-          width="150px"
-          trigger="hover">
+        <el-popover placement="top" justify="center" width="150px" trigger="hover">
           <el-slider
             :show-tooltip="false"
             v-model="volume"
             @input="changeVolume"
-          vertical
-          height="100px"></el-slider>
-          <span slot="reference"><i class="fas fa-volume-up fa-2x"></i></span>
+            vertical
+            height="100px"
+          ></el-slider>
+          <span slot="reference">
+            <i class="fas fa-volume-up fa-2x"></i>
+          </span>
         </el-popover>
       </div>
       <div class="nec-player-download">
-        <el-link :underline="false" :disabled="disabled" :href="(this.index <= -1) ? '' : (this.baseUrl + this.songList[this.index].id + '.mp3')" target="_blank" download><i class="fas fa-download fa-2x btn-download"></i></el-link>
+        <el-link
+          :underline="false"
+          :disabled="disabled"
+          :href="(this.index <= -1) ? '' : (this.baseUrl + this.songList[this.index].id + '.mp3')"
+          target="_blank"
+          download
+        >
+          <i class="fas fa-download fa-2x btn-download"></i>
+        </el-link>
       </div>
       <div class="nec-player-list-btn btn-list">
         <i class="fas fa-list-ul fa-2x" @click="expandSongList"></i>
@@ -60,11 +82,24 @@
         <i class="el-icon-close nec-player-list-close" @click="closeSongList"></i>
       </div>
       <div class="nec-player-list-wrapper">
-        <div v-for="(item, activeId) in songList" :key="item.url" :class="{'nec-player-list-detail-wrapper': true, 'active-wrapper': index === activeId}">
+        <div
+          v-for="(item, activeId) in songList"
+          :key="item.url"
+          :class="{'nec-player-list-detail-wrapper': true, 'active-wrapper': index === activeId}"
+        >
           <div class="nec-player-list-detail">
-            <span><i class="el-icon-video-play list-btn-play" @click="playFromList(activeId, item.id)"></i></span><span>{{ item.name }}</span>
-            <el-divider direction="vertical"></el-divider><span v-for="(itemArtist, index) in item.artists" :key="itemArtist.id">{{ itemArtist.name }}<span v-if="index < item.artists.length - 1">/</span></span>
-            <span><i class="el-icon-delete list-btn-delete" @click="removeSongs(activeId)"></i></span>
+            <span>
+              <i class="el-icon-video-play list-btn-play" @click="playFromList(activeId, item.id)"></i>
+            </span>
+            <span>{{ item.name }}</span>
+            <el-divider direction="vertical"></el-divider>
+            <span v-for="(itemArtist, index) in item.artists" :key="itemArtist.id">
+              {{ itemArtist.name }}
+              <span v-if="index < item.artists.length - 1">/</span>
+            </span>
+            <span>
+              <i class="el-icon-delete list-btn-delete" @click="removeSongs(activeId)"></i>
+            </span>
           </div>
         </div>
       </div>
@@ -83,7 +118,7 @@ function formatTime (sec) {
 }
 export default {
   name: 'AudioPlayer',
-  props: ['songInfo'],
+  props: ['songInfo', 'orderChange'],
   data () {
     return {
       playing: false,
@@ -105,7 +140,9 @@ export default {
     songInfo: {
       handler () {
         this.insertIntoSongList(JSON.parse(JSON.stringify(this.songInfo)))
-        this.playFromList(this.index, this.songInfo.id)
+        if (this.orderChange) {
+          this.playFromList(this.index, this.songInfo.id)
+        }
       },
       deep: true
     }
@@ -124,7 +161,7 @@ export default {
     // this.changeVolume()
   },
   beforeDestroy () {
-    window.removeEventListener('beforeunload', () => {})
+    window.removeEventListener('beforeunload', () => { })
   },
   filters: {
     initialSeconds (second = 0) {
@@ -170,7 +207,9 @@ export default {
       } else {
         this.songList.push(singleSong)
         this.$message.success('成功加入播放列表')
-        this.index = this.songList.length - 1
+        if (this.orderChange) {
+          this.index = this.songList.length - 1
+        }
         localStorage.setItem('songList', JSON.stringify(this.songList))
         localStorage.setItem('index', this.index)
       }
@@ -319,5 +358,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>
