@@ -8,7 +8,6 @@ import '@fortawesome/fontawesome-free/css/all.css'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 Vue.config.productionTip = false
-Vue.use(Element)
 Vue.use(VueAxios, axios)
 axios.defaults.withCredentials = true
 axios.defaults.baseURL = 'https://music.tomluvjerry.cn/api/'
