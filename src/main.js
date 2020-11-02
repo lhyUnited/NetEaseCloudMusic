@@ -3,9 +3,6 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import Element from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
-import 'element-ui/lib/theme-chalk/display.css'
 import './assets/nec.css'
 import '@fortawesome/fontawesome-free/css/all.css'
 import axios from 'axios'
@@ -14,7 +11,7 @@ Vue.config.productionTip = false
 Vue.use(Element)
 Vue.use(VueAxios, axios)
 axios.defaults.withCredentials = true
-axios.defaults.baseURL = 'http://localhost:3000'
+axios.defaults.baseURL = 'https://music.tomluvjerry.cn/api/'
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
