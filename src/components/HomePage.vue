@@ -47,19 +47,19 @@ export default {
     PageHeader,
     AudioPlayer
   },
-  data() {
+  data () {
     return {
       mainKeyWord: ''
     }
   },
   methods: {
-    search() {
+    search () {
       if (this.mainKeyWord !== '') {
         this.$router.push('/search?keyword=' + this.mainKeyWord)
         // .then(() => {})
       }
     },
-    getKeyWord(val) {
+    getKeyWord (val) {
       this.mainKeyWord = val
     }
   }
