@@ -39,7 +39,7 @@ export default {
     search () {
       if (this.keyWord !== '') {
         this.$router.push('/search?keyword=' + this.keyWord)
-          .then(() => {})
+        // .then(() => {})
       }
     },
     changeMainKeyWord (val) {
