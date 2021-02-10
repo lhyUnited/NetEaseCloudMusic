@@ -1,4 +1,4 @@
-# neteasecloudmusic
+# NeteaseCloudMusic
 
 > 网易云音乐播放器demo
 
