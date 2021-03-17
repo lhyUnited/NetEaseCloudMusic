@@ -27,7 +27,7 @@ https://static.tomluvjerry.cn/files/lee@tomluvjerry.cn/b47a7b33e42cf7c246dd8b770
         </ol>
         <div class="nec-main-footer">
           <p>
-            <a href="https://2020.tomluvjerry.cn"><img alt="我的主页" src="../assets/lhyUnited-brightgreen.svg" /></a>
+            <a href="https://lhyunited.me"><img alt="我的主页" src="../assets/lhyUnited-brightgreen.svg" /></a>
             <a href="https://github.com/lhyUnited/NetEaseCloudMusic/stargazers"><img height="20" alt="GitHub stars" src="../assets/NetEaseCloudMusic.svg" /></a>
           </p>
         </div>

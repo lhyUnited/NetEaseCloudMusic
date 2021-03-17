@@ -3,14 +3,19 @@ html, body, #app, .el-container {
   margin: 0;
   padding: 0;
 }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 @media screen and (max-width: 1440px) {
   .nec-player-list {
-    min-height: 500px !important;
+    min-height: 900px !important;
     font-size: 16px;
   }
   .nec-player-list-wrapper {
     width: 980px;
-    height: 470px !important;
+    height: 800px !important;
     overflow-y: auto;
     overflow-x: hidden;
   }
@@ -112,7 +117,7 @@ html, body, #app, .el-container {
 }
 .page-logo {
   position: absolute;
-  top: 0;
+  top: 10px;
   left: 20px;
 }
 .logo-link {
@@ -125,11 +130,17 @@ html, body, #app, .el-container {
   color: red;
 }
 .nec-search {
-  display: inline-block;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   margin-top: 10px;
 }
 .nec-search input {
   border: none;
+  width: 300px;
+}
+.nec-search input::placeholder {
+  text-align: center;
 }
 .nec-player-list-btn {
   float: left;
@@ -143,14 +154,16 @@ html, body, #app, .el-container {
   width: 980px;
   position: fixed;
   bottom: 60px;
-  color: white;
   left: 50%;
   -webkit-transform: translateX(-50%);
   -moz-transform: translateX(-50%);
   -ms-transform: translateX(-50%);
   -o-transform: translateX(-50%);
   transform: translateX(-50%);
-  background: #555B60;
+  background-color: #fff;
+  box-shadow: 0 -2px 6px 0 rgba(0,0,0,.2);
+  border-radius: 8px;
+
 }
 .nec-player-list-wrapper {
   width: 980px;
@@ -163,18 +176,18 @@ html, body, #app, .el-container {
   height: 8px;
   background-color: transparent;
 }
-.active-wrapper {
-  background-color: gray;
-}
 .nec-player-list-banner {
   position: relative;
   top: 0;
   width: 100%;
-  height: 30px;
+  height: 60px;
+  text-align: center;
+  line-height: 60px;
+  font-size: 32px;
 }
 .nec-player-list-close {
   position: absolute;
-  top: 10px;
+  top: 6px;
   right: 10px;
   cursor: pointer;
 }
@@ -182,18 +195,27 @@ html, body, #app, .el-container {
   overflow: hidden;
 }
 .nec-player-list-detail {
+  font-size: 22px;
   border-bottom: 1px solid gray;
   margin: 0 auto;
+  position: relative;
+  line-height: 40px;
   width: 600px;
   overflow: hidden;
 }
+.nec-player-list-detail span {
+  line-height: 36px;
+  vertical-align: middle;
+}
 .list-btn-delete {
   cursor: pointer;
-  float: right;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
 }
 .list-btn-play {
   cursor: pointer;
-  float: left;
 }
 .nec-main {
   position: absolute;
@@ -215,4 +237,11 @@ html, body, #app, .el-container {
 }
 .nec-main-input input {
   text-align: center;
+}
+
+i {
+  transition: .2s all ease-in-out;
+}
+i:hover {
+  color: #999999;
 }
