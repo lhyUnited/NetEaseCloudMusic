@@ -1,30 +1,28 @@
 # NeteaseCloudMusic
 
-  
+[中文](./docs/zh-CN.md)
 
-网易云音乐播放器demo
+Netease Cloud Music Player Demo
 
-[现在体验](https://music.tomluvjerry.cn)
+[Try it now](https://net-ease-cloud-music-kappa.vercel.app/)
 
+## 1. Description
 
-## 1. 说明
+1. All Netease Cloud APIs used on this site are provided by [Binaryify](https://github.com/Binaryify/NeteaseCloudMusicApi).
 
-1. 本站所有网易云api均由[Binaryify](https://github.com/Binaryify/NeteaseCloudMusicApi)提供
+2. Since the actual calls are made to the official Netease Cloud API, search results will be consistent with the official website.
 
-2. 由于实际调用的是网易云官方api，所以搜素结果与官网保持一致
+3. This site provides normal users with online listening and song downloading capabilities (VIP songs are restricted). Please do not use downloaded files for commercial purposes.
 
-3. 本站提供普通用户在线听歌和歌曲下载的功能<em>(vip歌曲受限)</em>，请勿将下载文件用于商业用途
-
-4. 本站所有功能在[chrome](https://static.tomluvjerry.cn/files/lee@tomluvjerry.cn/b47a7b33e42cf7c246dd8b770d890f11.exe), [firefox](https://static.tomluvjerry.cn/files/lee@tomluvjerry.cn/c63c683b1f6003194e7eed7614051128.exe), [搜狗高速浏览器](https://static.tomluvjerry.cn/files/lee@tomluvjerry.cn/6e555ae83734d90654db3d91fce20246.exe)上测试通过
-
-## 2. 开发
+## 2. Development
 ```bash
 yarn install
 yarn dev
 ```
 
 ## 3. TODO
-iOS设备存在无法调节音量问题
+There is an issue with volume adjustment on iOS devices.
 
 ## 4. License
 [MIT](https://opensource.org/licenses/MIT)
+
