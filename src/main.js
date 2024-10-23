@@ -10,7 +10,7 @@ import VueAxios from 'vue-axios'
 Vue.config.productionTip = false
 Vue.use(VueAxios, axios)
 axios.defaults.withCredentials = true
-axios.defaults.baseURL = 'https://music.tomluvjerry.cn/api/'
+axios.defaults.baseURL = 'https://neteasecloudmusicapi-three-pi.vercel.app/'
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
