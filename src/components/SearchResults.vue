@@ -2,58 +2,70 @@
   <el-container class="is-vertical">
     <page-header></page-header>
     <el-main class="nec-search-result">
-      <el-table
-        :data="songs"
-        :header-cell-style="{
-        'text-align': 'center'
-        }"
-        :cell-style="{'text-align': 'center'}"
-      >
-        <el-table-column label="名称">
-          <template slot-scope="props">
-            <el-link type="primary" @click="getUrl(props.row.id, props.row)">
-              <span>{{ props.row.name }}</span>
-            </el-link>
-          </template>
-        </el-table-column>
-        <el-table-column>
-          <template slot-scope="props">
-            <el-button
-              title="立即播放"
-              icon="el-icon-s-promotion"
-              type="success"
-              circle
-              size="mini"
-              @click="getUrl(props.row.id, props.row)"
-            ></el-button>
-            <el-button
-              title="加入清单"
-              icon="el-icon-plus"
-              type="info"
-              circle
-              size="mini"
-              @click="getUrl(props.row.id, props.row, false)"
-            ></el-button>
-          </template>
-        </el-table-column>
-        <el-table-column label="艺人">
-          <template slot-scope="props">
-            <span v-for="(item, index) in props.row.artists" :key="item.id">
-              {{ item.name }}
-              <span v-if="index < props.row.artists.length - 1">/</span>
-            </span>
-          </template>
-        </el-table-column>
-      </el-table>
-      <el-pagination
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-        :page-sizes="[10, 30, 50]"
-        layout="total, sizes, prev, pager, next, jumper"
-        :total="total"
-        :page-size="limit"
-        :current-page="offset"
-      ></el-pagination>
+      <el-skeleton animated :loading="loading" variant="rect" :throttle="500">
+        <template #template>
+          <el-skeleton-item style="width: 100%; height: 30px;"></el-skeleton-item>
+          <el-skeleton-item style="width: 100%; height: 30px;"></el-skeleton-item>
+          <el-skeleton-item style="width: 100%; height: 30px;"></el-skeleton-item>
+          <el-skeleton-item style="width: 100%; height: 30px;"></el-skeleton-item>
+          <el-skeleton-item style="width: 100%; height: 30px;"></el-skeleton-item>
+          <el-skeleton-item style="width: 100%; height: 30px;"></el-skeleton-item>
+        </template>
+        <div>
+          <el-table
+            :data="songs"
+            :header-cell-style="{
+              'text-align': 'center'
+            }"
+            :cell-style="{'text-align': 'center'}"
+          >
+            <el-table-column label="名称">
+              <template slot-scope="props">
+                <el-link type="primary" @click="getUrl(props.row.id, props.row)">
+                  <span>{{ props.row.name }}</span>
+                </el-link>
+              </template>
+            </el-table-column>
+            <el-table-column>
+              <template slot-scope="props">
+                <el-button
+                  title="立即播放"
+                  icon="el-icon-s-promotion"
+                  type="success"
+                  circle
+                  size="mini"
+                  @click="getUrl(props.row.id, props.row)"
+                ></el-button>
+                <el-button
+                  title="加入清单"
+                  icon="el-icon-plus"
+                  type="info"
+                  circle
+                  size="mini"
+                  @click="getUrl(props.row.id, props.row, false)"
+                ></el-button>
+              </template>
+            </el-table-column>
+            <el-table-column label="艺人">
+              <template slot-scope="props">
+              <span v-for="(item, index) in props.row.artists" :key="item.id">
+                {{ item.name }}
+                <span v-if="index < props.row.artists.length - 1">/</span>
+              </span>
+              </template>
+            </el-table-column>
+          </el-table>
+          <el-pagination
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            :page-sizes="[10, 30, 50]"
+            layout="total, sizes, prev, pager, next, jumper"
+            :total="total"
+            :page-size="limit"
+            :current-page="offset"
+          ></el-pagination>
+        </div>
+      </el-skeleton>
     </el-main>
   </el-container>
 </template>
@@ -78,7 +90,8 @@ export default {
         id: 0,
         url: '',
         artists: []
-      }
+      },
+      loading: false
     }
   },
   created () {
@@ -99,6 +112,7 @@ export default {
   },
   methods: {
     initialList () {
+      this.loading = true
       this.axios
         .get(
           '/search?keywords=' +
@@ -117,6 +131,9 @@ export default {
         })
         .catch(() => {
           this.$message.error('网络出错啦')
+        })
+        .finally(() => {
+          this.loading = false
         })
     },
     handleCurrentChange (val) {
