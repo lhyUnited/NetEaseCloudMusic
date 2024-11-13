@@ -2,58 +2,85 @@
   <el-container class="is-vertical">
     <page-header></page-header>
     <el-main class="nec-search-result">
-      <el-table
-        :data="songs"
-        :header-cell-style="{
-        'text-align': 'center'
-        }"
-        :cell-style="{'text-align': 'center'}"
-      >
-        <el-table-column label="名称">
-          <template slot-scope="props">
-            <el-link type="primary" @click="getUrl(props.row.id, props.row)">
-              <span>{{ props.row.name }}</span>
-            </el-link>
-          </template>
-        </el-table-column>
-        <el-table-column>
-          <template slot-scope="props">
-            <el-button
-              title="立即播放"
-              icon="el-icon-s-promotion"
-              type="success"
-              circle
-              size="mini"
-              @click="getUrl(props.row.id, props.row)"
-            ></el-button>
-            <el-button
-              title="加入清单"
-              icon="el-icon-plus"
-              type="info"
-              circle
-              size="mini"
-              @click="getUrl(props.row.id, props.row, false)"
-            ></el-button>
-          </template>
-        </el-table-column>
-        <el-table-column label="艺人">
-          <template slot-scope="props">
-            <span v-for="(item, index) in props.row.artists" :key="item.id">
-              {{ item.name }}
-              <span v-if="index < props.row.artists.length - 1">/</span>
-            </span>
-          </template>
-        </el-table-column>
-      </el-table>
-      <el-pagination
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-        :page-sizes="[10, 30, 50]"
-        layout="total, sizes, prev, pager, next, jumper"
-        :total="total"
-        :page-size="limit"
-        :current-page="offset"
-      ></el-pagination>
+      <el-skeleton animated :loading="loading" variant="rect" :throttle="500">
+        <template #template>
+          <el-skeleton-item
+            style="width: 100%; height: 30px;"
+          ></el-skeleton-item>
+          <el-skeleton-item
+            style="width: 100%; height: 30px;"
+          ></el-skeleton-item>
+          <el-skeleton-item
+            style="width: 100%; height: 30px;"
+          ></el-skeleton-item>
+          <el-skeleton-item
+            style="width: 100%; height: 30px;"
+          ></el-skeleton-item>
+          <el-skeleton-item
+            style="width: 100%; height: 30px;"
+          ></el-skeleton-item>
+          <el-skeleton-item
+            style="width: 100%; height: 30px;"
+          ></el-skeleton-item>
+        </template>
+        <div>
+          <el-table
+            :data="songs"
+            :header-cell-style="{
+              'text-align': 'center'
+            }"
+            :cell-style="{ 'text-align': 'center' }"
+          >
+            <el-table-column label="名称">
+              <template slot-scope="props">
+                <el-link
+                  type="primary"
+                  @click="getUrl(props.row.id, props.row)"
+                >
+                  <span>{{ props.row.name }}</span>
+                </el-link>
+              </template>
+            </el-table-column>
+            <el-table-column>
+              <template slot-scope="props">
+                <el-button
+                  title="立即播放"
+                  icon="el-icon-s-promotion"
+                  type="success"
+                  circle
+                  size="mini"
+                  @click="getUrl(props.row.id, props.row)"
+                ></el-button>
+                <el-button
+                  title="加入清单"
+                  icon="el-icon-plus"
+                  type="info"
+                  circle
+                  size="mini"
+                  @click="getUrl(props.row.id, props.row, false)"
+                ></el-button>
+              </template>
+            </el-table-column>
+            <el-table-column label="艺人">
+              <template slot-scope="props">
+                <span v-for="(item, index) in props.row.artists" :key="item.id">
+                  {{ item.name }}
+                  <span v-if="index < props.row.artists.length - 1">/</span>
+                </span>
+              </template>
+            </el-table-column>
+          </el-table>
+          <el-pagination
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            :page-sizes="[10, 30, 50]"
+            layout="total, sizes, prev, pager, next, jumper"
+            :total="total"
+            :page-size="limit"
+            :current-page="offset"
+          ></el-pagination>
+        </div>
+      </el-skeleton>
     </el-main>
   </el-container>
 </template>
@@ -78,7 +105,8 @@ export default {
         id: 0,
         url: '',
         artists: []
-      }
+      },
+      loading: false
     }
   },
   created () {
@@ -99,15 +127,16 @@ export default {
   },
   methods: {
     initialList () {
+      this.loading = true
       this.axios
         .get(
           '/search?keywords=' +
-          this.keyWord +
-          '&limit=' +
-          this.limit +
-          '&offset=' +
-          (this.offset - 1) +
-          '&type=1'
+            this.keyWord +
+            '&limit=' +
+            this.limit +
+            '&offset=' +
+            (this.offset - 1) +
+            '&type=1'
         )
         .then(res => {
           if (res.data.code === 200) {
@@ -117,6 +146,9 @@ export default {
         })
         .catch(() => {
           this.$message.error('网络出错啦')
+        })
+        .finally(() => {
+          this.loading = false
         })
     },
     handleCurrentChange (val) {
@@ -130,34 +162,37 @@ export default {
     search () {
       this.initialList()
     },
-    getUrl (id, row, orderChange = true) {
-      this.axios
-        .get('/check/music?id=' + id)
-        .then(() => {
-          this.axios
-            .get('/song/url?id=' + id)
-            .then(res => {
-              if (res.data.code === 200) {
-                if (res.data.data[0].url === null) {
-                  this.$message.error('出于vip限制，未获取到mp3地址')
-                } else {
-                  this.songInfo.id = id
-                  this.songInfo.url = res.data.data[0].url
-                  this.songInfo.name = row.name
-                  this.songInfo.artists = row.artists
-                  this.$emit('getSongInfo', this.songInfo, orderChange)
-                }
-              }
-            })
-            .catch(err => {
-              console.log(err)
-              this.$message.error('网络出错啦')
-            })
-        })
-        .catch(err => {
-          console.log(err)
-          this.$message.error('亲爱的,暂无版权')
-        })
+    async getUrl (id, row, orderChange = true) {
+      const valid = await this.checkMusic(id)
+      if (!valid) return
+      await this.getSongInfo(id, row, orderChange)
+    },
+    async checkMusic (id) {
+      try {
+        const { data } = await this.axios.get(`/check/music?id=${id}`)
+        if (!data.success) this.$message.error(data.message)
+        return data.success
+      } catch (error) {
+        this.$message.error(error)
+      }
+    },
+    async getSongInfo (id, row, orderChange) {
+      try {
+        const { data } = await this.axios.get(`/song/url?id=${id}`)
+        if (data.code === 200) {
+          if (data.data[0].url === null) {
+            this.$message.error('出于vip限制，未获取到mp3地址')
+          } else {
+            this.songInfo.id = id
+            this.songInfo.url = data.data[0].url
+            this.songInfo.name = row.name
+            this.songInfo.artists = row.artists
+            this.$emit('getSongInfo', this.songInfo, orderChange)
+          }
+        }
+      } catch (error) {
+        this.$message.error(error)
+      }
     }
   }
 }
