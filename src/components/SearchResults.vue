@@ -1,38 +1,43 @@
 <template>
   <el-container class="is-vertical">
-    <page-header></page-header>
+    <page-header />
     <el-main class="nec-search-result">
-      <el-skeleton animated :loading="loading" variant="rect" :throttle="500">
+      <el-skeleton
+        animated
+        :loading="loading"
+        variant="rect"
+        :throttle="500"
+      >
         <template #template>
           <el-skeleton-item
-            style="width: 100%; height: 30px;"
-          ></el-skeleton-item>
+            style="width: 100%; height: 30px"
+          />
           <el-skeleton-item
-            style="width: 100%; height: 30px;"
-          ></el-skeleton-item>
+            style="width: 100%; height: 30px"
+          />
           <el-skeleton-item
-            style="width: 100%; height: 30px;"
-          ></el-skeleton-item>
+            style="width: 100%; height: 30px"
+          />
           <el-skeleton-item
-            style="width: 100%; height: 30px;"
-          ></el-skeleton-item>
+            style="width: 100%; height: 30px"
+          />
           <el-skeleton-item
-            style="width: 100%; height: 30px;"
-          ></el-skeleton-item>
+            style="width: 100%; height: 30px"
+          />
           <el-skeleton-item
-            style="width: 100%; height: 30px;"
-          ></el-skeleton-item>
+            style="width: 100%; height: 30px"
+          />
         </template>
         <div>
           <el-table
             :data="songs"
             :header-cell-style="{
-              'text-align': 'center'
+              'text-align': 'center',
             }"
             :cell-style="{ 'text-align': 'center' }"
           >
             <el-table-column label="名称">
-              <template slot-scope="props">
+              <template #default="props">
                 <el-link
                   type="primary"
                   @click="getUrl(props.row.id, props.row)"
@@ -42,56 +47,61 @@
               </template>
             </el-table-column>
             <el-table-column>
-              <template slot-scope="props">
+              <template #default="props">
                 <el-button
                   title="立即播放"
-                  icon="el-icon-s-promotion"
+                  :icon="ElIconVideoPlay"
                   type="success"
                   circle
-                  size="mini"
+                  size="small"
                   @click="getUrl(props.row.id, props.row)"
-                ></el-button>
+                />
                 <el-button
                   title="加入清单"
-                  icon="el-icon-plus"
+                  :icon="ElIconPlus"
                   type="info"
                   circle
-                  size="mini"
+                  size="small"
                   @click="getUrl(props.row.id, props.row, false)"
-                ></el-button>
+                />
               </template>
             </el-table-column>
             <el-table-column label="艺人">
-              <template slot-scope="props">
-                <span v-for="(item, index) in props.row.artists" :key="item.id">
-                  {{ item.name }}
-                  <span v-if="index < props.row.artists.length - 1">/</span>
+              <template #default="props">
+                <span
+                  v-for="(item, index) in props.row.artists"
+                  :key="item.id"
+                >
+                  {{ item.name }}<span v-if="index < props.row.artists.length - 1">/</span>
                 </span>
               </template>
             </el-table-column>
           </el-table>
           <el-pagination
-            @size-change="handleSizeChange"
-            @current-change="handleCurrentChange"
             :page-sizes="[10, 30, 50]"
             layout="total, sizes, prev, pager, next, jumper"
             :total="total"
             :page-size="limit"
             :current-page="offset"
-          ></el-pagination>
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+          />
         </div>
       </el-skeleton>
     </el-main>
   </el-container>
 </template>
-
 <script>
+import {
+  VideoPlay as ElIconVideoPlay,
+  Plus as ElIconPlus,
+} from '@element-plus/icons-vue'
+import { shallowRef } from "vue"
 import PageHeader from '@/components/PageHeader'
-import AudioPlayer from '@/components/AudioPlayer'
 export default {
   name: 'SearchResults',
-  components: { AudioPlayer, PageHeader },
-  data () {
+  components: { PageHeader },
+  data() {
     return {
       hovered: false,
       keyWord: '',
@@ -104,29 +114,31 @@ export default {
         name: '',
         id: 0,
         url: '',
-        artists: []
+        artists: [],
       },
-      loading: false
+      loading: false,
+      ElIconVideoPlay: shallowRef(ElIconVideoPlay),
+      ElIconPlus: shallowRef(ElIconPlus),
     }
   },
-  created () {
+  watch: {
+    $route: {
+      handler() {
+        if (this.$route.query.keyword !== '') {
+          this.keyWord = this.$route.query.keyword
+          this.initialList()
+        }
+      },
+    },
+  },
+  created() {
     if (this.$route.query.keyword !== undefined) {
       this.keyWord = this.$route.query.keyword
       this.initialList()
     }
   },
-  watch: {
-    $route: {
-      handler () {
-        if (this.$route.query.keyword !== '') {
-          this.keyWord = this.$route.query.keyword
-          this.initialList()
-        }
-      }
-    }
-  },
   methods: {
-    initialList () {
+    initialList() {
       this.loading = true
       this.axios
         .get(
@@ -138,7 +150,7 @@ export default {
             (this.offset - 1) +
             '&type=1'
         )
-        .then(res => {
+        .then((res) => {
           if (res.data.code === 200) {
             this.songs = res.data.result.songs
             this.total = res.data.result.songCount
@@ -151,32 +163,33 @@ export default {
           this.loading = false
         })
     },
-    handleCurrentChange (val) {
+    handleCurrentChange(val) {
       this.offset = val
       this.initialList()
     },
-    handleSizeChange (val) {
+    handleSizeChange(val) {
       this.limit = val
       this.initialList()
     },
-    search () {
+    search() {
       this.initialList()
     },
-    async getUrl (id, row, orderChange = true) {
+    async getUrl(id, row, orderChange = true) {
       const valid = await this.checkMusic(id)
       if (!valid) return
       await this.getSongInfo(id, row, orderChange)
     },
-    async checkMusic (id) {
+    async checkMusic(id) {
       try {
         const { data } = await this.axios.get(`/check/music?id=${id}`)
         if (!data.success) this.$message.error(data.message)
         return data.success
       } catch (error) {
-        this.$message.error(error)
+        console.log(error)
+        // this.$message.error(error)
       }
     },
-    async getSongInfo (id, row, orderChange) {
+    async getSongInfo(id, row, orderChange) {
       try {
         const { data } = await this.axios.get(`/song/url?id=${id}`)
         if (data.code === 200) {
@@ -193,8 +206,8 @@ export default {
       } catch (error) {
         this.$message.error(error)
       }
-    }
-  }
+    },
+  },
 }
 </script>
 
