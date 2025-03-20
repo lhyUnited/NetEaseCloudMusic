@@ -1,28 +1,28 @@
-import Vue from 'vue'
-import Router from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
+
 import HomePage from '@/components/HomePage'
 import NotFound from '@/components/error/NotFound'
 import SearchResults from '@/components/SearchResults'
 
-Vue.use(Router)
-
-export default new Router({
-  mode: 'history',
+const router = createRouter({
+  history: createWebHistory(),
   routes: [
     {
       path: '/',
       name: 'HomePage',
-      component: HomePage
+      component: HomePage,
     },
     {
       path: '/search',
       name: 'SearchResults',
-      component: SearchResults
+      component: SearchResults,
     },
     {
-      path: '*',
+      path: '/:pathMatch(.*)*',
       name: 'NotFound',
-      component: NotFound
-    }
-  ]
+      component: NotFound,
+    },
+  ],
 })
+
+export default router

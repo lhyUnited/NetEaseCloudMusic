@@ -75,11 +75,31 @@ html, body, #app, .el-container {
   width: 200px;
   float: left;
 }
-.btn-back, .btn-play, .btn-next, .btn-download, .btn-list, .btn-volume {
+.btn-list, .btn-volume {
   cursor: pointer;
   color: white;
   margin-right: 10px;
 }
+
+.btn-back, .btn-play, .btn-next, .btn-download {
+  margin-right: 10px;
+}
+
+.btn-back, .btn-play, .btn-next, .btn-download.disabled {
+  cursor: not-allowed;
+  color: rgb(199.5, 201, 204);
+}
+
+
+.btn-back.canplay, .btn-play.canplay, .btn-next.canplay, .btn-download:not(.disabled) {
+  cursor: pointer;
+  color: white;
+}
+
+.btn-back.canplay:hover, .btn-play.canplay:hover, .btn-next.canplay:hover, .btn-download:not(.disabled):hover, .btn-list:hover, .btn-volume:hover {
+  color: #999999;
+}
+
 .nec-player-download, .nec-player-volume {
   float: left;
   margin: 12px 0 0 12px;
@@ -246,7 +266,4 @@ html, body, #app, .el-container {
 
 i {
   transition: .2s all ease-in-out;
-}
-i:hover {
-  color: #999999;
 }
