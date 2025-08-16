@@ -4,9 +4,9 @@
     <el-main class="nec-search-result">
       <el-skeleton
         animated
-        :loading="loading"
+        :loading="!!loadingCount"
         variant="rect"
-        :throttle="500"
+        :throttle="{leading: 500, initVal: true, trailing: 500}"
       >
         <template #template>
           <el-skeleton-item
@@ -116,7 +116,7 @@ export default {
         url: '',
         artists: [],
       },
-      loading: false,
+      loadingCount: 0,
       ElIconVideoPlay: shallowRef(ElIconVideoPlay),
       ElIconPlus: shallowRef(ElIconPlus),
     }
@@ -139,7 +139,7 @@ export default {
   },
   methods: {
     initialList() {
-      this.loading = true
+      this.loadingCount++
       this.axios
         .get(
           '/search?keywords=' +
@@ -160,7 +160,7 @@ export default {
           this.$message.error('网络出错啦')
         })
         .finally(() => {
-          this.loading = false
+          this.loadingCount--
         })
     },
     handleCurrentChange(val) {
@@ -169,6 +169,7 @@ export default {
     },
     handleSizeChange(val) {
       this.limit = val
+      this.offset = 1
       this.initialList()
     },
     search() {
