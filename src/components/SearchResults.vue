@@ -6,6 +6,7 @@
         animated
         :loading="!!loadingCount"
         variant="rect"
+        :throttle="{leading: 500, initVal: true, trailing: 500}"
       >
         <template #template>
           <el-skeleton-item
