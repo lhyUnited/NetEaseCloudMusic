@@ -169,6 +169,7 @@ export default {
     },
     handleSizeChange(val) {
       this.limit = val
+      this.offset = 1
       this.initialList()
     },
     search() {
